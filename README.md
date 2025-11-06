@@ -25,7 +25,7 @@ Perfect for “start timer for whatever branch I’m on right now”—without s
 
 ```lua
 {
-  "yourname/clockwork.nvim",
+  "davec504/clockwork.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "folke/which-key.nvim" },
   config = function()
     require("clockwork")
