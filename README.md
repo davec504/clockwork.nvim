@@ -28,7 +28,7 @@ Perfect for “start timer for whatever branch I’m on right now”—without s
   "davec504/clockwork.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "folke/which-key.nvim" },
   config = function()
-    require("clockwork")
+    require("clockwork_timer")
   end,
 }
 ````
