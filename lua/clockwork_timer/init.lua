@@ -30,8 +30,7 @@ local function get_issue_key_from_branch()
 
 	-- build pattern dynamically
 	local pattern = "^" .. prefix .. "%-?%d+"
-	local branch
-	get_branch()
+	local branch = get_branch()
 
 	return branch:match(pattern)
 end
