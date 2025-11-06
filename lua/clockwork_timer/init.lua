@@ -32,7 +32,7 @@ local function get_issue_key_from_branch()
 	prefix = vim.pesc(prefix)
 
 	-- build pattern dynamically
-	local pattern = string.format("^%s%%-?%d+", prefix)
+	local pattern = "^" .. prefix .. "%-?%d+"
 	local branch
 	get_branch()
 
