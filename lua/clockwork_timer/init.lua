@@ -28,9 +28,6 @@ local function get_issue_key_from_branch()
 	-- read env var once
 	local prefix = os.getenv("TICKET_PREFIX") or "TELFE"
 
-	-- escape magic chars if user sets a weird prefix
-	prefix = vim.pesc(prefix)
-
 	-- build pattern dynamically
 	local pattern = "^" .. prefix .. "%-?%d+"
 	local branch
