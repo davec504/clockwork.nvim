@@ -1,0 +1,133 @@
+*clockwork.nvim*        Clockwork timers from Neovim
+
+==============================================================================
+INTRODUCTION                                                    *clockwork*
+
+Clockwork.nvim is a lightweight plugin that allows you to start and stop
+Clockwork time-tracking timers directly from inside Neovim.
+
+The plugin automatically extracts issue keys from your current Git branch,
+using an optional `TICKET_PREFIX` environment variable (default: `COMPANY`).
+
+Example branch names:
+    COMPANY-1234/auth         → COMPANY-1234
+    COMPANY1234-auth          → COMPANY1234
+    ABC-99/new-ui           → ABC-99
+    ABC99-card-fix          → ABC99
+
+The plugin communicates with the Clockwork REST API using plenary.curl.
+
+==============================================================================
+
+INSTALLATION                                                   *clockwork-install*
+
+With lazy.nvim:
+
+>lua
+    {
+      "davec504/clockwork.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "folke/which-key.nvim" },
+      config = function()
+        require("clockwork")
+      end,
+    }
+<
+
+==============================================================================
+
+ENVIRONMENT VARIABLES                                          *clockwork-environment*
+
+The following environment variables control plugin behaviour:
+
+CLOCKWORK_TOKEN (*required*)
+    Your Clockwork API token.
+>
+    export CLOCKWORK_TOKEN="your_api_token"
+<
+
+TICKET_PREFIX (*optional*)
+    Default: `COMPANY`
+    Used to match branch names.
+>
+    export TICKET_PREFIX="ABC"
+<
+
+==============================================================================
+
+USAGE                                                          *clockwork-usage*
+
+Commands:
+    :ClockworkStart
+        Start a timer using the issue key taken from your current branch.
+
+    :ClockworkStart ABC-123
+        Start a timer using an explicit issue key.
+
+    :ClockworkStop
+        Stop a timer using the current branch issue key.
+
+    :ClockworkStop ABC-123
+        Stop a timer using an explicit issue key.
+
+==============================================================================
+
+KEYMAPS                                                        *clockwork-keymaps*
+
+Default mappings:
+
+NORMAL mode:
+
+    <M-cg>         Start timer (using current branch)
+    <M-cs>         Stop timer (using current branch)
+
+Which-Key group:
+
+    <leader>c      Clockwork group
+    <leader>cg     Start timer
+    <leader>cs     Stop timer
+
+==============================================================================
+
+ERROR HANDLING                                                 *clockwork-errors*
+
+The plugin shows notifications for common issues:
+
+- Missing CLOCKWORK_TOKEN
+- Invalid/missing issue key
+- Branch does not contain a key
+- 422 Clockwork API response (invalid or duplicate request)
+- Git command failure
+
+==============================================================================
+
+API                                                            *clockwork-api*
+
+You may also call the module directly:
+
+>lua
+    local clock = require("clockwork")
+
+    clock.start()         -- infer from branch
+    clock.start("ABC-1")  -- explicit issue key
+
+    clock.stop()
+    clock.stop("ABC-1")
+<
+
+==============================================================================
+
+LICENSE                                                       *clockwork-license*
+
+MIT License — see LICENSE file in repository.
+
+==============================================================================
+
+AUTHOR                                                        *clockwork-author*
+
+Written by Dave C.
+
+GitHub: https://github.com/davec504/clockwork.nvim
+
+------------------------------------------------------------------------------
+vim:tw=78:ts=8:noet:ft=help:norl
+
